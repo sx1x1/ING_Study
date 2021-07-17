@@ -9,14 +9,19 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author sxr
  * @date 2021/7/16 7:58 下午
  */
+@Service
 public class Operation {
     // 获取客户端
-    private static final RestHighLevelClient client = ConnectEsUtil.getClient();
+    @Resource
+    private RestHighLevelClient client;
 
     // 查询
     @SneakyThrows
@@ -42,11 +47,5 @@ public class Operation {
 
         // 输出
         hits.forEach(System.out::println);
-    }
-
-    @SneakyThrows
-    public static void main(String[] args) {
-        Operation operation = new Operation();
-        operation.query();
     }
 }
