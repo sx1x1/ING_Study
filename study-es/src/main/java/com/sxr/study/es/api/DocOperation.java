@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @date 2021/7/16 7:58 下午
  */
 @Service
-public class Operation {
+public class DocOperation {
     // 获取客户端
     @Resource
     private RestHighLevelClient client;
