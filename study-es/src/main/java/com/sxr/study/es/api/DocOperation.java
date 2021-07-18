@@ -113,7 +113,7 @@ public class DocOperation {
         SearchSourceBuilder builder = new SearchSourceBuilder();
 
         // 查询体构建
-        QueryBuilder queryBuilder = QueryBuilders.termQuery("year", 1962);
+        QueryBuilder queryBuilder = QueryBuilders.termQuery("year", 1972);
         builder.query(queryBuilder);
 
         // 搜索请求构建，设置请求体
