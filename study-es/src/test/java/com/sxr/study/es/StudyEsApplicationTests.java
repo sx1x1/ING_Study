@@ -16,23 +16,42 @@ class StudyEsApplicationTests {
     @Resource
     private IndexOperation indexOperation;
 
-    @Test
-    void contextLoads() {
-    }
-
-    @Test
-    void queryTest(){
-        docOperation.query();
-    }
-
+    // 以下为索引操作测试
     @Test
     void creatIndexTest(){
         indexOperation.creatIndex();
     }
 
     @Test
+    void getIndexTest(){
+        indexOperation.getIndex();
+    }
+
+    @Test
     void deleteIndexTest(){
         indexOperation.deleteIndex();
+    }
+
+    // -------------------------------------
+    // 以下为文档操作测试
+    @Test
+    void indexDocTest(){
+        docOperation.indexDoc();
+    }
+
+    @Test
+    void updateDocTest(){
+        docOperation.updateDoc();
+    }
+
+    @Test
+    void deleteDocTest(){
+        docOperation.deleteDoc();
+    }
+
+    @Test
+    void queryTest(){
+        docOperation.query();
     }
 
 }
