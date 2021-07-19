@@ -41,7 +41,7 @@ class StudyEsApplicationTests {
 
     @Test
     void getDocTest(){
-        docOperation.getDoc("12");
+        docOperation.getDoc("10");
     }
 
     @Test
@@ -69,4 +69,13 @@ class StudyEsApplicationTests {
         docOperation.searchMatch();
     }
 
+    @Test
+    void searchPhraseSuggestTest(){
+        docOperation.searchPhraseSuggest();
+    }
+
+    @Test
+    void searchTermSuggestTest(){
+        docOperation.searchTermSuggest();
+    }
 }
