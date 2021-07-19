@@ -40,6 +40,11 @@ class StudyEsApplicationTests {
     }
 
     @Test
+    void getDocTest(){
+        docOperation.getDoc("12");
+    }
+
+    @Test
     void updateDocTest(){
         docOperation.updateDoc();
     }

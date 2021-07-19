@@ -2,6 +2,7 @@ package com.sxr.study.es.api;
 
 import com.alibaba.fastjson.JSON;
 import lombok.SneakyThrows;
+import org.elasticsearch.action.DocWriteRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -16,6 +17,7 @@ import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -42,7 +44,7 @@ public class DocOperation {
     @SneakyThrows
     public void indexDoc() {
         // 创建文档请求构建
-        IndexRequest request = new IndexRequest("movies", "movie", "7");
+        IndexRequest request = new IndexRequest("movies", "movie", "12");
 
         // 准备对象实体
         String[] genres = {"sxr", "dyt"};
@@ -51,12 +53,16 @@ public class DocOperation {
         // 设置请求
         // request.id("7");
         request.source(JSON.toJSONString(movie), XContentType.JSON);
+        request.routing("id");
+        request.timeout(TimeValue.timeValueSeconds(1));
+        // request.version(1);
+        request.opType(DocWriteRequest.OpType.CREATE);
 
         // 客户端文档创建操作
         IndexResponse response = client.index(request, RequestOptions.DEFAULT);
 
         // 查询
-        getDoc("7");
+        getDoc("11");
     }
 
     @SneakyThrows
@@ -68,6 +74,7 @@ public class DocOperation {
         GetResponse response = client.get(request, RequestOptions.DEFAULT);
 
         // 输出
+        System.out.println(response.getVersion());
         System.out.println(response.getSource());
     }
 
