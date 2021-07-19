@@ -50,8 +50,18 @@ class StudyEsApplicationTests {
     }
 
     @Test
-    void queryTest(){
-        docOperation.query();
+    void bulkDocTest(){
+        docOperation.bulkDoc();
+    }
+
+    @Test
+    void searchTermTest(){
+        docOperation.searchTerm();
+    }
+
+    @Test
+    void searchMatchTest(){
+        docOperation.searchMatch();
     }
 
 }

@@ -2,6 +2,8 @@ package com.sxr.study.es.api;
 
 import com.alibaba.fastjson.JSON;
 import lombok.SneakyThrows;
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
@@ -15,13 +17,17 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author sxr
@@ -103,10 +109,35 @@ public class DocOperation {
         System.out.println(response);
     }
 
+    @SneakyThrows
+    public void bulkDoc() {
+        // 创建批量请求
+        BulkRequest request = new BulkRequest();
+
+        // 准备数据
+        List<Movie> movies = new ArrayList<>();
+        movies.add(new Movie("a", "b", 1962, new String[]{"a", "b"}));
+        movies.add(new Movie("b", "b", 1962, new String[]{"a", "b"}));
+        movies.add(new Movie("c", "b", 1962, new String[]{"a", "b"}));
+
+        // 添加批量请求
+        for (int i = 0; i < movies.size(); i++) {
+            request.add(new IndexRequest("movies")
+                    .id(String.valueOf(i + 8))
+                    .source(JSON.toJSONString(movies.get(i)), XContentType.JSON));
+        }
+
+        // 客户端文档批量操作
+        BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
+
+        // 输出
+        System.out.println(response.hasFailures());
+    }
+
     // 查询
     @SneakyThrows
-    public void query() {
-        // 搜索请求构建，设置请求路径
+    public void searchTerm() {
+        // 文档搜索请求构建，设置请求路径
         SearchRequest request = new SearchRequest("movies");
 
         // 请求体构建
@@ -126,6 +157,28 @@ public class DocOperation {
         SearchHits hits = response.getHits();
 
         // 输出
+        hits.forEach(System.out::println);
+    }
+
+    @SneakyThrows
+    public void searchMatch() {
+        // 文档搜索请求构建
+        SearchRequest request = new SearchRequest("movies");
+
+        // 请求体构建
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+
+        // 查询体构建
+        QueryBuilder queryBuilder = QueryBuilders.matchQuery("year", 1962);
+
+        builder.query(queryBuilder);
+        request.source(builder);
+
+        // 客户端文档搜索操作
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 输出
+        SearchHits hits = response.getHits();
         hits.forEach(System.out::println);
     }
 }
