@@ -70,12 +70,18 @@ class StudyEsApplicationTests {
     }
 
     @Test
+    void searchTermSuggestTest(){
+        docOperation.searchTermSuggest();
+    }
+
+    @Test
     void searchPhraseSuggestTest(){
         docOperation.searchPhraseSuggest();
     }
 
     @Test
-    void searchTermSuggestTest(){
-        docOperation.searchTermSuggest();
+    void searchCompletionSuggestTest(){
+        docOperation.searchCompletionSuggester();
     }
+
 }

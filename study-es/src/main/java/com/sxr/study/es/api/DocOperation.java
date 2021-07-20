@@ -36,6 +36,7 @@ import org.elasticsearch.search.suggest.Suggest;
 import org.elasticsearch.search.suggest.SuggestBuilder;
 import org.elasticsearch.search.suggest.SuggestBuilders;
 import org.elasticsearch.search.suggest.SuggestionBuilder;
+import org.elasticsearch.search.suggest.completion.CompletionSuggestionBuilder;
 import org.elasticsearch.search.suggest.phrase.PhraseSuggestionBuilder;
 import org.elasticsearch.search.suggest.term.TermSuggestionBuilder;
 import org.springframework.stereotype.Service;
@@ -283,6 +284,36 @@ public class DocOperation {
     }
 
     @SneakyThrows
+    public void searchTermSuggest() {
+        // 创建搜索请求
+        SearchRequest request = new SearchRequest("movies");
+
+        // 请求体构建
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+
+        // 查询体构建
+        QueryBuilder query = QueryBuilders.matchQuery("title", "kill");
+        builder.query(query);
+
+        // 建议体构建
+        SuggestBuilder sugBuilder = new SuggestBuilder();
+        TermSuggestionBuilder suggestionBuilder = SuggestBuilders.termSuggestion("title").text("killer bil");
+        sugBuilder.addSuggestion("suggest_title", suggestionBuilder);
+        builder.suggest(sugBuilder);
+
+        request.source(builder);
+
+        // 客户端文档搜索操作
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 输出
+        Suggest suggest = response.getSuggest();
+        final SearchHits hits = response.getHits();
+        hits.forEach(System.out::println);
+        System.out.println("suggest = " + suggest);
+    }
+
+    @SneakyThrows
     public void searchPhraseSuggest() {
         // 创建搜索请求
         SearchRequest request = new SearchRequest("movies");
@@ -296,7 +327,7 @@ public class DocOperation {
 
         // 建议体构建
         SuggestBuilder sugBuilder = new SuggestBuilder();
-        PhraseSuggestionBuilder suggestionBuilder = SuggestBuilders.phraseSuggestion("title").text("kill the bill");
+        PhraseSuggestionBuilder suggestionBuilder = SuggestBuilders.phraseSuggestion("title").text("killer sxr bill");
         sugBuilder.addSuggestion("suggest_dir", suggestionBuilder);
         builder.suggest(sugBuilder);
 
@@ -313,23 +344,23 @@ public class DocOperation {
     }
 
     @SneakyThrows
-    public void searchTermSuggest() {
-        // 创建搜索请求
-        SearchRequest request = new SearchRequest("movies");
+    public void searchCompletionSuggester() {
+        // 搜索请求创建
+        SearchRequest request = new SearchRequest("users");
 
-        // 请求体构建
+        // 请求体创建
         SearchSourceBuilder builder = new SearchSourceBuilder();
 
-        // 查询体构建
-        QueryBuilder query = QueryBuilders.matchQuery("title", "kill");
-        builder.query(query);
-
-        // 建议体构建
+        // 建议体创建
         SuggestBuilder sugBuilder = new SuggestBuilder();
-        TermSuggestionBuilder suggestionBuilder = SuggestBuilders.termSuggestion("title").text("kill the Bill");
-        sugBuilder.addSuggestion("suggest_title", suggestionBuilder);
-        builder.suggest(sugBuilder);
+        // 根据前缀自动补全至建议值
+        CompletionSuggestionBuilder suggestionBuilder = SuggestBuilders
+                .completionSuggestion("name_suggest")
+                .prefix("sun")
+                .skipDuplicates(true);
+        sugBuilder.addSuggestion("name_sug",suggestionBuilder);
 
+        builder.suggest(sugBuilder);
         request.source(builder);
 
         // 客户端文档搜索操作
@@ -341,4 +372,5 @@ public class DocOperation {
         hits.forEach(System.out::println);
         System.out.println("suggest = " + suggest);
     }
+
 }
