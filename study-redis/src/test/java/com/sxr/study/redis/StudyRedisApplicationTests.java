@@ -20,4 +20,8 @@ class StudyRedisApplicationTests {
     void stringApiTest(){
         redisApi.stringApi();
     }
+    @Test
+    void listApiTest(){
+        redisApi.listApi();
+    }
 }
