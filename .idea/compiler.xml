@@ -9,16 +9,19 @@
         <outputRelativeToContentRoot value="true" />
         <module name="study-redis" />
         <module name="study-es" />
+        <module name="study-kafka" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="study-es" target="1.8" />
+      <module name="study-kafka" target="1.8" />
       <module name="study-redis" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="study-es" options="-parameters" />
+      <module name="study-kafka" options="-parameters" />
       <module name="study-redis" options="-parameters" />
     </option>
   </component>
