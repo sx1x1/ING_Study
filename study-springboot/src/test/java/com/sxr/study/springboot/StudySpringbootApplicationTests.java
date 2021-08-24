@@ -23,7 +23,7 @@ class StudySpringbootApplicationTests {
     void testValidateController() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new ValidateController()).build();
 
-        Person person = Person.builder().name("sxr").age(1).build();
+        Person person = Person.builder().name("SXR").age(15).build();
         mockMvc.perform(get("/sxr/a")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONString(person)));
