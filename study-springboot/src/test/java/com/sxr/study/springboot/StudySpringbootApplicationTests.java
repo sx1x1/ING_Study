@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -23,7 +22,7 @@ class StudySpringbootApplicationTests {
     void testValidateController() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new ValidateController()).build();
 
-        Person person = Person.builder().name("SXR").age(15).build();
+        Person person = Person.builder().name("SXR").age(1).build();
         mockMvc.perform(get("/sxr/a")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONString(person)));
