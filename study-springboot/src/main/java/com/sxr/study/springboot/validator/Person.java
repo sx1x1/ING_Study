@@ -21,11 +21,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Person implements Serializable {
 
-    @NotBlank
-    @Pattern(regexp = "^[A-Z]+$")
+    @NotBlank(groups = AddGroup.class)
+    @Pattern(regexp = "^[A-Z]+$",groups = AddGroup.class)
     private String name;
 
-    @Max(18)
+    @Max(value = 18, groups = AddGroup.class)
     @Min(10)
     private Integer age;
 }

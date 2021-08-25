@@ -4,7 +4,6 @@ import com.sxr.study.springboot.exception.CommonResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
@@ -17,11 +16,15 @@ import javax.validation.constraints.Size;
 @RequestMapping("/sxr")
 @Validated
 public class ValidateController {
-    @Resource
-    private ValidateUtil validateUtil;
 
+    /**
+     * 指定分组后只有指定分组会生效，这种方式十分不友好
+     *
+     * @param person 实体
+     * @return 返回值
+     */
     @GetMapping("/a")
-    public String testRequestBody(@RequestBody Person person) {
+    public String testRequestBody(@RequestBody @Validated(AddGroup.class) Person person) {
         System.out.println(person);
         return person.toString();
     }
