@@ -1,6 +1,7 @@
 package com.sxr.study.springboot.validator;
 
 import com.sxr.study.springboot.exception.CommonResult;
+import com.sxr.study.springboot.validator.group.AddGroup;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,5 +1,6 @@
 package com.sxr.study.springboot.validator;
 
+import com.sxr.study.springboot.validator.group.AddGroup;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

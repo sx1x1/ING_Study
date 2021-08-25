@@ -1,4 +1,4 @@
-package com.sxr.study.springboot.validator;
+package com.sxr.study.springboot.validator.group;
 
 /**
  * @author sxr
