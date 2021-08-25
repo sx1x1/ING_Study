@@ -1,6 +1,5 @@
 package com.sxr.study.springboot.validator;
 
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
