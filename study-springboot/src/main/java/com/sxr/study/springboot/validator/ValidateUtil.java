@@ -1,5 +1,6 @@
 package com.sxr.study.springboot.validator;
 
+import com.google.common.collect.Lists;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
