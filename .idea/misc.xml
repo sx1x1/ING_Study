@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/study-redis/pom.xml" />
         <option value="$PROJECT_DIR$/study-kafka/pom.xml" />
         <option value="$PROJECT_DIR$/study-springboot/pom.xml" />
+        <option value="$PROJECT_DIR$/study-jvm/pom.xml" />
       </list>
     </option>
   </component>

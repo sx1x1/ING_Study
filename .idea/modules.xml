@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ING_Study.iml" filepath="$PROJECT_DIR$/.idea/ING_Study.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-es/study-es.iml" filepath="$PROJECT_DIR$/study-es/study-es.iml" />
+      <module fileurl="file://$PROJECT_DIR$/study-jvm/study-jvm.iml" filepath="$PROJECT_DIR$/study-jvm/study-jvm.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-kafka/study-kafka.iml" filepath="$PROJECT_DIR$/study-kafka/study-kafka.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-redis/study-redis.iml" filepath="$PROJECT_DIR$/study-redis/study-redis.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-springboot/study-springboot.iml" filepath="$PROJECT_DIR$/study-springboot/study-springboot.iml" />

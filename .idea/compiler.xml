@@ -10,11 +10,13 @@
         <module name="study-springboot" />
         <module name="study-es" />
         <module name="study-redis" />
+        <module name="study-jvm" />
         <module name="study-kafka" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="study-es" target="1.8" />
+      <module name="study-jvm" target="1.8" />
       <module name="study-kafka" target="1.8" />
       <module name="study-redis" target="1.8" />
       <module name="study-springboot" target="1.8" />
